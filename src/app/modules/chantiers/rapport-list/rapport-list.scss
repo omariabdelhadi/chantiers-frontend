@@ -1,0 +1,60 @@
+.rapport-section {
+  padding: 8px 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  .section-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+
+    mat-icon {
+      color: var(--mat-sys-primary);
+    }
+  }
+}
+
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+}
+
+.empty-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--mat-sys-on-surface-variant);
+  font-style: italic;
+  padding: 16px 0;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.rapport-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rapport-card {
+  .rapport-contenu {
+    margin: 8px 0 0;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}

@@ -1,0 +1,133 @@
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$blue-palette,
+        tertiary: mat.$yellow-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.page-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mat-elevation-z2 {
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),
+              0 2px 2px 0 rgba(0,0,0,.14),
+              0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+// ── Global table styles (SSMTM brand) ────────────────────────────────────────
+
+tr.mat-mdc-header-row {
+  background-color: #1565C0 !important;
+}
+
+th.mat-mdc-header-cell {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-bottom: none !important;
+}
+
+tr.mat-mdc-row {
+  border-bottom: 1px solid #E0E0E0;
+}
+
+tr.mat-mdc-row:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+tr.mat-mdc-row:nth-child(even) {
+  background-color: #F0F4FF;
+}
+
+tr.mat-mdc-row:hover {
+  background-color: #E3F0FF !important;
+}
+
+// Edit icon-buttons (color="accent") → golden yellow
+.mat-mdc-icon-button.mat-accent {
+  --mdc-icon-button-icon-color: #FFB800;
+  color: #FFB800;
+}
+
+// ── Form card branding ────────────────────────────────────────────────────────
+
+.form-card mat-card-header {
+  border-left: 4px solid #FFB800;
+  padding-left: 12px;
+  margin-bottom: 16px !important;
+}
+
+.form-card mat-card-title,
+.form-card .mat-mdc-card-title {
+  color: #1565C0 !important;
+  font-weight: 700 !important;
+}
+
+// ── Form buttons (.button-row and .form-actions) ──────────────────────────────
+
+.button-row,
+.form-actions {
+  button[mat-raised-button][color="primary"] {
+    --mdc-filled-button-container-shape: 8px;
+  }
+
+  button[mat-stroked-button]:not([color]),
+  button[mat-stroked-button][color=""] {
+    --mdc-outlined-button-outline-color: #1565C0;
+    --mdc-outlined-button-label-text-color: #1565C0;
+    --mdc-outlined-button-container-shape: 8px;
+
+    &:hover {
+      background-color: rgba(21, 101, 192, 0.08);
+    }
+  }
+}
+
+// ── Lightbox dialog panel ─────────────────────────────────────────────────────
+
+.lightbox-panel {
+  .mat-mdc-dialog-container {
+    padding: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    .mdc-dialog__container {
+      background: transparent !important;
+    }
+
+    .mdc-dialog__surface {
+      background: rgba(0, 0, 0, 0.88) !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+    }
+  }
+}

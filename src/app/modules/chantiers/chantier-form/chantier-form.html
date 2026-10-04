@@ -1,0 +1,98 @@
+<div class="form-container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>{{ isEdit ? 'Modifier le chantier' : 'Nouveau chantier' }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      @if (loading) {
+        <div class="loading-wrapper">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nom du chantier</mat-label>
+            <input matInput formControlName="nom" />
+            @if (form.get('nom')?.hasError('required')) {
+              <mat-error>Nom requis</mat-error>
+            }
+            @if (form.get('nom')?.hasError('minlength')) {
+              <mat-error>Minimum 2 caractères</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rows="3"></textarea>
+          </mat-form-field>
+
+          <div class="row-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Date de début</mat-label>
+              <input matInput type="date" formControlName="dateDebut" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Date de fin</mat-label>
+              <input matInput type="date" formControlName="dateFin" />
+            </mat-form-field>
+          </div>
+
+          <div class="row-2">
+            <mat-form-field appearance="outline">
+              <mat-label>Statut</mat-label>
+              <mat-select formControlName="statut">
+                @for (s of statuts; track s) {
+                  <mat-option [value]="s">{{ statutLabels[s] }}</mat-option>
+                }
+              </mat-select>
+              @if (form.get('statut')?.hasError('required')) {
+                <mat-error>Statut requis</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Chef de chantier</mat-label>
+              <mat-select formControlName="chefId">
+                @if (usersLoading) {
+                  <mat-option disabled>Chargement...</mat-option>
+                } @else {
+                  @for (u of users; track u.id) {
+                    <mat-option [value]="u.id">
+                      {{ u.nom }} — {{ getRoleLabel(u.role) }}
+                    </mat-option>
+                  }
+                }
+              </mat-select>
+              @if (form.get('chefId')?.hasError('required')) {
+                <mat-error>Chef requis</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          @if (errorMessage) {
+            <div class="error-message">{{ errorMessage }}</div>
+          }
+
+          <div class="button-row">
+            <button mat-stroked-button type="button" (click)="cancel()">Annuler</button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="form.invalid || submitting"
+            >
+              @if (submitting) {
+                <mat-spinner diameter="20"></mat-spinner>
+              } @else {
+                {{ isEdit ? 'Enregistrer' : 'Créer' }}
+              }
+            </button>
+          </div>
+        </form>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

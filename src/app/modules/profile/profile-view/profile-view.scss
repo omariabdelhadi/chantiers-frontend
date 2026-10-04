@@ -1,0 +1,116 @@
+.view-container {
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.back-row {
+  margin-bottom: 16px;
+}
+
+.loading-center {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.profile-card {
+  overflow: hidden;
+}
+
+.photo-section {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 24px 20px;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #1565C0;
+  flex-shrink: 0;
+}
+
+.avatar-placeholder {
+  font-size: 100px;
+  width: 100px;
+  height: 100px;
+  color: #9E9E9E;
+  flex-shrink: 0;
+}
+
+.name-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1565C0;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+
+  &.role-admin {
+    background: #1565C0;
+    color: #ffffff;
+  }
+
+  &.role-chef_chantier {
+    background: #FFB800;
+    color: #333333;
+  }
+
+  &.role-super_admin {
+    background: #0D47A1;
+    color: #ffffff;
+  }
+}
+
+.fields-section {
+  padding: 20px 24px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.field-icon {
+  color: #757575;
+  margin-top: 2px;
+}
+
+.field-label {
+  font-size: 11px;
+  color: #9E9E9E;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.field-value {
+  font-size: 15px;
+  color: #212121;
+}
+
+.field-empty {
+  font-size: 15px;
+  color: #BDBDBD;
+  font-style: italic;
+}

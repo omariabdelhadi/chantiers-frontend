@@ -1,0 +1,114 @@
+.tache-list-container {
+  padding: 8px 0;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+  font-size: 0.75rem;
+}
+
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  gap: 8px;
+  color: var(--mat-sys-on-surface-variant);
+
+  .empty-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    opacity: 0.3;
+  }
+
+  p { margin: 0; }
+}
+
+.full-width { width: 100%; }
+
+.description-preview {
+  font-size: 0.75rem;
+  color: var(--mat-sys-on-surface-variant);
+  margin-top: 2px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.avancement-cell {
+  min-width: 180px;
+
+  .avancement-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+
+    .avancement-pct {
+      font-size: 0.8rem;
+      font-weight: 600;
+      min-width: 36px;
+      color: var(--mat-sys-primary);
+    }
+
+    .avancement-bar {
+      flex: 1;
+      border-radius: 4px;
+    }
+  }
+
+  .avancement-slider {
+    width: 100%;
+  }
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
+.no-employes {
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.statut-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  &.statut-en-cours  { background: #e3f2fd; color: #1565c0; }
+  &.statut-terminee  { background: #e8f5e9; color: #2e7d32; }
+  &.statut-a-faire   { background: #f5f5f5; color: #616161; }
+}

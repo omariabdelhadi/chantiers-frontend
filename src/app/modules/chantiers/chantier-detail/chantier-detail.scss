@@ -1,0 +1,132 @@
+.page-container {
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 64px;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  .page-title {
+    flex: 1;
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1565C0;
+    border-left: 4px solid #FFB800;
+    padding-left: 12px;
+  }
+
+  .pdf-btn {
+    background-color: #FFB800;
+    color: #333333;
+    border-radius: 8px;
+  }
+}
+
+.avancement-card {
+  margin-bottom: 20px;
+
+  .avancement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+
+    .avancement-label {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #1565C0;
+    }
+
+    .avancement-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1565C0;
+    }
+  }
+
+  .big-progress {
+    height: 12px;
+    border-radius: 6px;
+    --mdc-linear-progress-active-indicator-color: #1565C0;
+  }
+}
+
+// Section card titles: blue + yellow left border
+.info-card,
+.taches-card,
+.photos-card,
+.rapports-card {
+  mat-card-header {
+    border-left: 4px solid #FFB800;
+    padding-left: 12px;
+  }
+
+  mat-card-title {
+    color: #1565C0 !important;
+    font-weight: 700 !important;
+  }
+}
+
+.info-card {
+  margin-bottom: 20px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-top: 8px;
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &.full {
+      grid-column: 1 / -1;
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--mat-sys-on-surface-variant);
+    }
+  }
+}
+
+.taches-card {
+  margin-bottom: 20px;
+}
+
+.photos-card {
+  margin-bottom: 20px;
+}
+
+.rapports-card {
+  margin-bottom: 20px;
+}
+
+.statut-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  &.statut-en-cours   { background: #1565C0; color: #ffffff; }
+  &.statut-termine    { background: #2E7D32; color: #ffffff; }
+  &.statut-en-attente { background: #FFB800; color: #333333; }
+}

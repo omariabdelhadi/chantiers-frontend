@@ -1,0 +1,97 @@
+<div class="tache-list-container">
+  <div class="list-header">
+    <h2 class="section-title">
+      Tâches
+      <span class="count-badge">{{ dataSource.data.length }}</span>
+    </h2>
+    <button mat-raised-button color="primary" (click)="ajouterTache()">
+      <mat-icon>add</mat-icon>
+      Ajouter une tâche
+    </button>
+  </div>
+
+  @if (loading) {
+    <div class="loading-wrapper">
+      <mat-spinner diameter="36"></mat-spinner>
+    </div>
+  } @else if (dataSource.data.length === 0) {
+    <div class="empty-state">
+      <mat-icon class="empty-icon">assignment</mat-icon>
+      <p>Aucune tâche pour ce chantier.</p>
+    </div>
+  } @else {
+    <table mat-table [dataSource]="dataSource" class="full-width">
+
+      <!-- Titre -->
+      <ng-container matColumnDef="titre">
+        <th mat-header-cell *matHeaderCellDef>Titre</th>
+        <td mat-cell *matCellDef="let t">
+          <strong>{{ t.titre }}</strong>
+          @if (t.description) {
+            <div class="description-preview">{{ t.description }}</div>
+          }
+        </td>
+      </ng-container>
+
+      <!-- Statut -->
+      <ng-container matColumnDef="statut">
+        <th mat-header-cell *matHeaderCellDef>Statut</th>
+        <td mat-cell *matCellDef="let t">
+          <span class="statut-badge" [ngClass]="getStatutClass(t.statut)">
+            {{ getStatutLabel(t.statut) }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Avancement -->
+      <ng-container matColumnDef="avancement">
+        <th mat-header-cell *matHeaderCellDef>Avancement</th>
+        <td mat-cell *matCellDef="let t" class="avancement-cell">
+          <div class="avancement-row">
+            <span class="avancement-pct">{{ t.avancement }}%</span>
+            <mat-progress-bar mode="determinate" [value]="t.avancement" class="avancement-bar"></mat-progress-bar>
+          </div>
+          <mat-slider min="0" max="100" step="5" discrete class="avancement-slider">
+            <input matSliderThumb [(ngModel)]="t.avancement" (change)="onSliderChange(t.id, t.avancement)">
+          </mat-slider>
+        </td>
+      </ng-container>
+
+      <!-- Employés -->
+      <ng-container matColumnDef="employes">
+        <th mat-header-cell *matHeaderCellDef>Employés</th>
+        <td mat-cell *matCellDef="let t">
+          @if (t.employes.length === 0) {
+            <span class="no-employes">—</span>
+          } @else {
+            <span class="employes-count">
+              {{ t.employes.length }} employé{{ t.employes.length > 1 ? 's' : '' }}
+            </span>
+          }
+        </td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let t" class="actions-cell">
+          <button mat-icon-button color="primary" (click)="voir(t.id)" matTooltip="Voir le détail">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="ouvrirAffecter(t)" matTooltip="Affecter employés">
+            <mat-icon>group_add</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="modifierTache(t.id)" matTooltip="Modifier">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="supprimerTache(t.id)" matTooltip="Supprimer">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  }
+</div>

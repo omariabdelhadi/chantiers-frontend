@@ -1,0 +1,63 @@
+<div class="rapport-section">
+  <div class="section-header">
+    <h2 class="section-title">
+      <mat-icon>description</mat-icon>
+      Rapports
+    </h2>
+    @if (canCreate()) {
+      <button mat-raised-button color="primary" (click)="ouvrirAjouter()">
+        <mat-icon>add</mat-icon>
+        Ajouter un rapport
+      </button>
+    }
+  </div>
+
+  @if (loading) {
+    <div class="loading-wrapper">
+      <mat-spinner diameter="32"></mat-spinner>
+    </div>
+  } @else if (rapports.length === 0) {
+    <p class="empty-message">
+      <mat-icon>inbox</mat-icon>
+      Aucun rapport
+    </p>
+  } @else {
+    <div class="rapport-cards">
+      @for (rapport of rapports; track rapport.id) {
+        <mat-card class="rapport-card">
+          <mat-card-header>
+            <mat-card-title>{{ rapport.titre }}</mat-card-title>
+            <mat-card-subtitle>
+              Par <strong>{{ rapport.auteurNom }}</strong>
+              &bull;
+              {{ rapport.dateCreation | date:'dd/MM/yyyy à HH:mm' }}
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="rapport-contenu">{{ rapport.contenu }}</p>
+          </mat-card-content>
+          @if (canCreate()) {
+            <mat-card-actions align="end">
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="modifierRapport(rapport)"
+                matTooltip="Modifier le rapport"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteRapport(rapport.id)"
+                matTooltip="Supprimer le rapport"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card-actions>
+          }
+        </mat-card>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,241 @@
+<div class="dashboard-container">
+
+  @if (loading) {
+    <div class="loading-center">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  } @else if (stats) {
+
+    <!-- Welcome header -->
+    <div class="dashboard-welcome">
+      <h1 class="welcome-title">Bienvenue sur SSMTM - Gestion des Chantiers</h1>
+    </div>
+
+    <!-- ROW 1: Stat cards -->
+    <div class="stat-cards">
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <mat-icon class="stat-icon icon-blue">construction</mat-icon>
+          <div class="stat-number">{{ stats.totalChantiers }}</div>
+          <div class="stat-label">Total Chantiers</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <mat-icon class="stat-icon icon-green">task</mat-icon>
+          <div class="stat-number">{{ stats.totalTaches }}</div>
+          <div class="stat-label">Total Tâches</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <mat-icon class="stat-icon icon-orange">people</mat-icon>
+          <div class="stat-number">{{ stats.totalEmployes }}</div>
+          <div class="stat-label">Total Employés</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <mat-icon class="stat-icon icon-purple">trending_up</mat-icon>
+          <div class="stat-number">{{ stats.avancementMoyen | number:'1.1-1' }}%</div>
+          <div class="stat-label">Avancement moyen</div>
+        </mat-card-content>
+      </mat-card>
+
+      @if (isAdmin()) {
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <mat-icon class="stat-icon icon-teal">manage_accounts</mat-icon>
+            <div class="stat-number">{{ stats.totalChefs }}</div>
+            <div class="stat-label">Chefs de chantier</div>
+          </mat-card-content>
+        </mat-card>
+      }
+
+      @if (isSuperAdmin()) {
+        <mat-card class="stat-card">
+          <mat-card-content>
+            <mat-icon class="stat-icon icon-indigo">admin_panel_settings</mat-icon>
+            <div class="stat-number">{{ stats.totalAdmins }}</div>
+            <div class="stat-label">Administrateurs</div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+
+    <!-- ROW 2: Charts -->
+    <div class="charts-row">
+      <mat-card class="chart-card">
+        <mat-card-header>
+          <mat-card-title>Chantiers par statut</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <canvas baseChart
+            [data]="doughnutData"
+            [type]="doughnutType"
+            [options]="doughnutOptions">
+          </canvas>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="chart-card">
+        <mat-card-header>
+          <mat-card-title>Avancement moyen</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <canvas baseChart
+            [data]="barData"
+            [type]="barType"
+            [options]="barOptions">
+          </canvas>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- ROW 3: Last chantiers table -->
+    @if (stats.dernierChantiers && stats.dernierChantiers.length > 0) {
+    <mat-card class="table-card">
+      <mat-card-header>
+        <mat-card-title>Derniers chantiers</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="stats.dernierChantiers" class="full-width">
+
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef>Nom</th>
+            <td mat-cell *matCellDef="let c">{{ c.nom }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="chef">
+            <th mat-header-cell *matHeaderCellDef>Chef</th>
+            <td mat-cell *matCellDef="let c">{{ c.chefNom }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="statut">
+            <th mat-header-cell *matHeaderCellDef>Statut</th>
+            <td mat-cell *matCellDef="let c">
+              <span [class]="'badge ' + getStatutClass(c.statut)">{{ getStatutLabel(c.statut) }}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="avancement">
+            <th mat-header-cell *matHeaderCellDef>Avancement</th>
+            <td mat-cell *matCellDef="let c">
+              <div class="progress-cell">
+                <mat-progress-bar mode="determinate" [value]="c.avancement"></mat-progress-bar>
+                <span class="progress-text">{{ c.avancement }}%</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              class="clickable-row"
+              (click)="goToChantier(row)">
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+    }
+
+    <!-- ROW 4: Chantiers urgents -->
+    @if (stats.chantiersUrgents.length > 0) {
+      <div class="alert-section">
+        <div class="alert-header">
+          <span class="alert-title urgent-title">
+            <mat-icon class="alert-title-icon icon-orange">schedule</mat-icon>
+            Chantiers urgents ({{ stats.chantiersUrgents.length }})
+          </span>
+          <span class="alert-subtitle">Chantiers dont la date de fin est dans moins de 7 jours</span>
+        </div>
+
+        <div class="alert-cards">
+          @for (c of stats.chantiersUrgents; track c.id) {
+            <mat-card class="alert-card urgent-card">
+              <mat-card-content>
+                <div class="alert-card-nom">{{ c.nom }}</div>
+
+                <div class="alert-card-row">
+                  <mat-icon class="alert-meta-icon">person</mat-icon>
+                  <span>{{ c.chefNom || '—' }}</span>
+                </div>
+
+                <div class="alert-card-row">
+                  <mat-icon class="alert-meta-icon">event</mat-icon>
+                  <span class="alert-date">{{ c.dateFin | date:'dd/MM/yyyy' }}</span>
+                </div>
+
+                <div class="alert-card-row">
+                  <span [class]="'badge ' + getStatutClass(c.statut)">{{ getStatutLabel(c.statut) }}</span>
+                </div>
+
+                <div class="progress-cell alert-progress">
+                  <mat-progress-bar mode="determinate" [value]="c.avancement"></mat-progress-bar>
+                  <span class="progress-text">{{ c.avancement }}%</span>
+                </div>
+
+                <button mat-stroked-button color="primary" class="alert-voir-btn"
+                        (click)="goToChantier(c)">
+                  <mat-icon>visibility</mat-icon>
+                  Voir
+                </button>
+              </mat-card-content>
+            </mat-card>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- ROW 5: Chantiers en retard -->
+    @if (stats.chantiersEnRetard.length > 0) {
+      <div class="alert-section">
+        <div class="alert-header">
+          <span class="alert-title retard-title">
+            <mat-icon class="alert-title-icon icon-red">warning</mat-icon>
+            Chantiers en retard ({{ stats.chantiersEnRetard.length }})
+          </span>
+          <span class="alert-subtitle">Chantiers dont la date de fin est dépassée et non terminés</span>
+        </div>
+
+        <div class="alert-cards">
+          @for (c of stats.chantiersEnRetard; track c.id) {
+            <mat-card class="alert-card retard-card">
+              <mat-card-content>
+                <div class="alert-card-nom">{{ c.nom }}</div>
+
+                <div class="alert-card-row">
+                  <mat-icon class="alert-meta-icon">person</mat-icon>
+                  <span>{{ c.chefNom || '—' }}</span>
+                </div>
+
+                <div class="alert-card-row">
+                  <mat-icon class="alert-meta-icon">event</mat-icon>
+                  <span class="alert-date">{{ c.dateFin | date:'dd/MM/yyyy' }}</span>
+                </div>
+
+                <div class="alert-card-row">
+                  <span [class]="'badge ' + getStatutClass(c.statut)">{{ getStatutLabel(c.statut) }}</span>
+                </div>
+
+                <div class="progress-cell alert-progress">
+                  <mat-progress-bar mode="determinate" [value]="c.avancement"></mat-progress-bar>
+                  <span class="progress-text">{{ c.avancement }}%</span>
+                </div>
+
+                <button mat-stroked-button color="warn" class="alert-voir-btn"
+                        (click)="goToChantier(c)">
+                  <mat-icon>visibility</mat-icon>
+                  Voir
+                </button>
+              </mat-card-content>
+            </mat-card>
+          }
+        </div>
+      </div>
+    }
+
+  }
+</div>

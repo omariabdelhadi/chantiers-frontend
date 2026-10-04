@@ -1,0 +1,104 @@
+<div class="page-container">
+  @if (loading) {
+    <div class="loading-wrapper">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  } @else if (chantier) {
+    <div class="detail-header">
+      <button mat-icon-button (click)="back()" matTooltip="Retour">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1 class="page-title">{{ chantier.nom }}</h1>
+      <button mat-raised-button color="primary" (click)="edit()">
+        <mat-icon>edit</mat-icon>
+        Modifier
+      </button>
+      <button mat-raised-button class="pdf-btn" (click)="downloadPdf()" [disabled]="isDownloading">
+        @if (isDownloading) {
+          <mat-spinner diameter="18" style="display:inline-block;margin-right:6px"></mat-spinner>
+        } @else {
+          <mat-icon>download</mat-icon>
+        }
+        {{ isDownloading ? 'Génération...' : 'Télécharger PDF' }}
+      </button>
+    </div>
+
+    <!-- Avancement global -->
+    <mat-card class="avancement-card">
+      <mat-card-content>
+        <div class="avancement-header">
+          <span class="avancement-label">Avancement global</span>
+          <span class="avancement-value">{{ chantier.avancement }}%</span>
+        </div>
+        <mat-progress-bar
+          mode="determinate"
+          [value]="chantier.avancement"
+          class="big-progress"
+        ></mat-progress-bar>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Informations -->
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>Informations</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="info-grid">
+        <div class="info-item">
+          <span class="info-label">Statut</span>
+          <span class="statut-badge" [ngClass]="getStatutClass(chantier.statut)">
+            {{ getStatutLabel(chantier.statut) }}
+          </span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Chef de chantier</span>
+          <span>{{ chantier.chefNom }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Téléphone chef</span>
+          <span>{{ chantier.chefTelephone || '—' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Ville chef</span>
+          <span>{{ chantier.chefVille || '—' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Date de début</span>
+          <span>{{ chantier.dateDebut | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Date de fin</span>
+          <span>{{ chantier.dateFin | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="info-item full">
+          <span class="info-label">Description</span>
+          <span>{{ chantier.description || '—' }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Tâches -->
+    <mat-card class="taches-card">
+      <mat-card-content>
+        <app-tache-list
+          [chantierId]="chantier.id"
+          (tacheChanged)="reloadChantier()"
+        ></app-tache-list>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Photos -->
+    <mat-card class="photos-card">
+      <mat-card-content>
+        <app-photo-gallery [chantierId]="chantier.id"></app-photo-gallery>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Rapports -->
+    <mat-card class="rapports-card">
+      <mat-card-content>
+        <app-rapport-list [chantierId]="chantier.id"></app-rapport-list>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

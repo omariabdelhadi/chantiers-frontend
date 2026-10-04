@@ -1,0 +1,80 @@
+.not-found-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: #f5f7fa;
+}
+
+.logo {
+  margin-bottom: 24px;
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+
+.code {
+  font-size: 120px;
+  font-weight: 800;
+  color: #1565C0;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -4px;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1565C0;
+  margin: 0 0 16px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #757575;
+  max-width: 460px;
+  margin: 0 0 40px;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-dashboard {
+  background-color: #1565C0 !important;
+  color: #ffffff !important;
+  border-radius: 8px;
+  padding: 0 24px;
+  height: 44px;
+
+  &:hover {
+    background-color: #0D47A1 !important;
+  }
+
+  mat-icon {
+    color: #ffffff !important;
+  }
+}
+
+.btn-logout {
+  border: 2px solid #1565C0 !important;
+  color: #1565C0 !important;
+  border-radius: 8px;
+  padding: 0 24px;
+  height: 44px;
+
+  &:hover {
+    background-color: rgba(21, 101, 192, 0.08);
+  }
+
+  mat-icon {
+    color: #1565C0 !important;
+  }
+}

@@ -1,0 +1,67 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  padding: 32px 24px;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 560px;
+
+  mat-card-header {
+    margin-bottom: 8px;
+  }
+}
+
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+}
+
+.full-width { width: 100%; }
+
+.avancement-field {
+  margin-bottom: 16px;
+
+  .avancement-label-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+
+    .avancement-label {
+      font-size: 0.875rem;
+      color: var(--mat-sys-on-surface-variant);
+    }
+
+    .avancement-value {
+      font-weight: 600;
+      color: var(--mat-sys-primary);
+    }
+  }
+
+  .full-width-slider {
+    width: 100%;
+  }
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+
+  button {
+    min-width: 120px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.error-message {
+  color: var(--mat-sys-error);
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}

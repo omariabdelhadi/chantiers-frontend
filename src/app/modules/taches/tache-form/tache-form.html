@@ -1,0 +1,73 @@
+<div class="form-container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>{{ isEdit ? 'Modifier la tâche' : 'Nouvelle tâche' }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      @if (loading) {
+        <div class="loading-wrapper">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Titre de la tâche</mat-label>
+            <input matInput formControlName="titre" />
+            @if (form.get('titre')?.hasError('required')) {
+              <mat-error>Titre requis</mat-error>
+            }
+            @if (form.get('titre')?.hasError('minlength')) {
+              <mat-error>Minimum 2 caractères</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rows="3"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Statut</mat-label>
+            <mat-select formControlName="statut">
+              @for (s of statuts; track s) {
+                <mat-option [value]="s">{{ statutLabels[s] }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <div class="avancement-field">
+            <div class="avancement-label-row">
+              <span class="avancement-label">Avancement</span>
+              <span class="avancement-value">{{ avancementValue }}%</span>
+            </div>
+            <mat-slider min="0" max="100" step="5" discrete class="full-width-slider">
+              <input matSliderThumb formControlName="avancement">
+            </mat-slider>
+          </div>
+
+          @if (errorMessage) {
+            <div class="error-message">{{ errorMessage }}</div>
+          }
+
+          <div class="button-row">
+            <button mat-stroked-button type="button" (click)="cancel()">Annuler</button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="form.invalid || submitting || !chantierId"
+            >
+              @if (submitting) {
+                <mat-spinner diameter="20"></mat-spinner>
+              } @else {
+                {{ isEdit ? 'Enregistrer' : 'Créer' }}
+              }
+            </button>
+          </div>
+        </form>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

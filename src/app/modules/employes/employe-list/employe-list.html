@@ -1,0 +1,113 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Employés</h1>
+    @if (isAdmin()) {
+      <button mat-raised-button color="primary" routerLink="/employes/new">
+        <mat-icon>person_add</mat-icon>
+        Ajouter un employé
+      </button>
+    }
+  </div>
+
+  <!-- Filter bar -->
+  @if (allEmployes.length > 0) {
+  <mat-card class="filter-card">
+    <mat-card-content>
+      <div class="filter-bar">
+
+        <mat-form-field appearance="outline" class="filter-search">
+          <mat-label>Rechercher un employé...</mat-label>
+          <input matInput [(ngModel)]="searchFilter" (ngModelChange)="applyFilters()" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="filter-select">
+          <mat-label>Poste</mat-label>
+          <mat-select [(ngModel)]="posteFilter" (ngModelChange)="applyFilters()">
+            <mat-option value="">Tous les postes</mat-option>
+            @for (poste of postes; track poste) {
+              <mat-option [value]="poste">{{ poste }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-stroked-button (click)="resetFilters()" class="reset-btn">
+          <mat-icon>refresh</mat-icon>
+          Réinitialiser
+        </button>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+  }
+
+  @if (loading) {
+    <div class="loading-wrapper">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  } @else if (filteredEmployes.length === 0) {
+    <mat-card class="empty-state">
+      <mat-card-content>
+        <mat-icon class="empty-icon">people</mat-icon>
+        <p>Aucun employé trouvé.</p>
+        @if (isAdmin() && !searchFilter && !posteFilter) {
+          <button mat-raised-button color="primary" routerLink="/employes/new">
+            Ajouter le premier employé
+          </button>
+        }
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <mat-card>
+      <table mat-table [dataSource]="filteredEmployes" class="full-width">
+
+        <!-- Nom -->
+        <ng-container matColumnDef="nom">
+          <th mat-header-cell *matHeaderCellDef>Nom</th>
+          <td mat-cell *matCellDef="let e"><strong>{{ e.nom }}</strong></td>
+        </ng-container>
+
+        <!-- Prénom -->
+        <ng-container matColumnDef="prenom">
+          <th mat-header-cell *matHeaderCellDef>Prénom</th>
+          <td mat-cell *matCellDef="let e">{{ e.prenom }}</td>
+        </ng-container>
+
+        <!-- Poste -->
+        <ng-container matColumnDef="poste">
+          <th mat-header-cell *matHeaderCellDef>Poste</th>
+          <td mat-cell *matCellDef="let e">
+            <span class="poste-badge">{{ e.poste }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Téléphone -->
+        <ng-container matColumnDef="telephone">
+          <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+          <td mat-cell *matCellDef="let e">{{ e.telephone || '—' }}</td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let e" class="actions-cell">
+            @if (isAdmin()) {
+              <button mat-icon-button color="primary" (click)="voir(e.id)" matTooltip="Voir le détail">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="modifier(e.id)" matTooltip="Modifier">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="supprimer(e.id)" matTooltip="Supprimer">
+                <mat-icon>delete</mat-icon>
+              </button>
+            }
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  }
+</div>

@@ -1,0 +1,191 @@
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 64px;
+}
+
+// ── Back button ───────────────────────────────────────────────────────────────
+
+.back-btn {
+  margin-bottom: 16px;
+  color: #1565C0;
+
+  mat-icon { margin-right: 4px; }
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+.detail-header {
+  margin-bottom: 24px;
+  border-left: 4px solid #FFB800;
+  padding-left: 16px;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.tache-titre {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1565C0;
+}
+
+.chantier-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #1565C0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  opacity: 0.8;
+
+  &:hover { opacity: 1; text-decoration: underline; }
+
+  mat-icon { font-size: 16px; width: 16px; height: 16px; }
+}
+
+// ── Cards ─────────────────────────────────────────────────────────────────────
+
+.detail-card {
+  margin-bottom: 20px;
+  border-radius: 10px !important;
+
+  mat-card-header {
+    border-left: 4px solid #FFB800;
+    padding-left: 12px;
+    margin-bottom: 12px !important;
+  }
+
+  mat-card-title,
+  .mat-mdc-card-title {
+    color: #1565C0 !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+// ── Avancement ────────────────────────────────────────────────────────────────
+
+.avancement-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.avancement-pct {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1565C0;
+  min-width: 56px;
+}
+
+.avancement-bar {
+  flex: 1;
+  height: 10px;
+  border-radius: 5px;
+  --mdc-linear-progress-active-indicator-color: #1565C0;
+  --mdc-linear-progress-track-color: #E3F0FF;
+}
+
+// ── Description ───────────────────────────────────────────────────────────────
+
+.description-text {
+  margin: 0;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.empty-text {
+  margin: 0;
+  color: #999;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+// ── Employés grid ─────────────────────────────────────────────────────────────
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: #1565C0;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.employes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.employe-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #F0F4FF;
+  border: 1px solid #C5D8F7;
+}
+
+.emp-icon {
+  color: #1565C0;
+  flex-shrink: 0;
+}
+
+.emp-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.emp-nom {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emp-poste {
+  font-size: 0.78rem;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ── Status badges ─────────────────────────────────────────────────────────────
+
+.statut-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  &.statut-en-cours { background: #e3f2fd; color: #1565c0; }
+  &.statut-terminee { background: #e8f5e9; color: #2e7d32; }
+  &.statut-a-faire  { background: #f5f5f5; color: #616161; }
+}

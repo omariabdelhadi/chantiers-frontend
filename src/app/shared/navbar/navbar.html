@@ -1,0 +1,77 @@
+<mat-toolbar color="primary" class="navbar">
+
+  <!-- Hamburger button: visible only on < 600px -->
+  <button mat-icon-button class="hamburger-btn"
+          (click)="toggleMobileMenu()"
+          matTooltip="Menu">
+    <mat-icon>{{ mobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+  </button>
+
+  <!-- Click-outside overlay -->
+  @if (mobileMenuOpen) {
+    <div class="mobile-menu-overlay" (click)="closeMobileMenu()"></div>
+  }
+
+  <!-- Custom mobile dropdown -->
+  @if (mobileMenuOpen) {
+    <div class="mobile-dropdown">
+      <a class="mobile-menu-item" routerLink="/chantiers" (click)="closeMobileMenu()">
+        <mat-icon>construction</mat-icon> Chantiers
+      </a>
+      <a class="mobile-menu-item" routerLink="/employes" (click)="closeMobileMenu()">
+        <mat-icon>people</mat-icon> Employés
+      </a>
+      <a class="mobile-menu-item" routerLink="/dashboard" (click)="closeMobileMenu()">
+        <mat-icon>dashboard</mat-icon> Dashboard
+      </a>
+      @if (getRole() === 'ADMIN' || isSuperAdmin()) {
+        <a class="mobile-menu-item" routerLink="/register" (click)="closeMobileMenu()">
+          <mat-icon>manage_accounts</mat-icon> Utilisateurs
+        </a>
+      }
+    </div>
+  }
+
+  <a routerLink="/dashboard" class="brand">
+    <img src="assets/logo-ssmtm.png" alt="SSMTM" class="brand-logo" />
+  </a>
+
+  <!-- Desktop / tablet nav links: hidden on < 600px -->
+  <nav class="nav-links">
+    <a mat-button routerLink="/chantiers" routerLinkActive="active-link">
+      <mat-icon>construction</mat-icon>
+      <span class="nav-link-text">Chantiers</span>
+    </a>
+    <a mat-button routerLink="/employes" routerLinkActive="active-link">
+      <mat-icon>people</mat-icon>
+      <span class="nav-link-text">Employés</span>
+    </a>
+    <a mat-button routerLink="/dashboard" routerLinkActive="active-link">
+      <mat-icon>dashboard</mat-icon>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+    @if (authService.getRole() === 'ADMIN') {
+      <a mat-button routerLink="/register" routerLinkActive="active-link">
+        <mat-icon>manage_accounts</mat-icon>
+        <span class="nav-link-text">Utilisateurs</span>
+      </a>
+    }
+  </nav>
+
+  <span class="spacer"></span>
+
+  <a class="user-info" routerLink="/profile" matTooltip="Mon profil">
+    @if (photoProfile) {
+      <img [src]="'/' + photoProfile" alt="Photo" class="nav-avatar" />
+    } @else {
+      <mat-icon>account_circle</mat-icon>
+    }
+    <span class="user-name">{{ nom }}</span>
+    <span class="user-role">{{ getSuperAdminRole() }}</span>
+  </a>
+
+  <button mat-icon-button (click)="logout()" matTooltip="Se déconnecter">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+</mat-toolbar>

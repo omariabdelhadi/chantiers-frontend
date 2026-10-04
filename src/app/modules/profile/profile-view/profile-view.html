@@ -1,0 +1,73 @@
+<div class="view-container">
+
+  <!-- Back button -->
+  <div class="back-row">
+    <button mat-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Retour
+    </button>
+  </div>
+
+  @if (loading) {
+    <div class="loading-center">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  } @else if (profile) {
+
+    <mat-card class="profile-card">
+
+      <!-- Photo -->
+      <div class="photo-section">
+        @if (profile.photoProfile) {
+          <img [src]="'/' + profile.photoProfile" alt="Photo de profil" class="profile-img" />
+        } @else {
+          <mat-icon class="avatar-placeholder">account_circle</mat-icon>
+        }
+        <div class="name-block">
+          <h2 class="profile-name">{{ profile.nom }}</h2>
+          <span [class]="'role-badge role-' + profile.role.toLowerCase()">{{ getRoleLabel(profile.role) }}</span>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <!-- Fields -->
+      <mat-card-content class="fields-section">
+
+        <div class="field-row">
+          <mat-icon class="field-icon">email</mat-icon>
+          <div>
+            <div class="field-label">Email</div>
+            <div class="field-value">{{ profile.email }}</div>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <mat-icon class="field-icon">phone</mat-icon>
+          <div>
+            <div class="field-label">Téléphone</div>
+            @if (profile.telephone) {
+              <div class="field-value">{{ profile.telephone }}</div>
+            } @else {
+              <div class="field-empty">Non renseigné</div>
+            }
+          </div>
+        </div>
+
+        <div class="field-row">
+          <mat-icon class="field-icon">location_city</mat-icon>
+          <div>
+            <div class="field-label">Ville</div>
+            @if (profile.ville) {
+              <div class="field-value">{{ profile.ville }}</div>
+            } @else {
+              <div class="field-empty">Non renseigné</div>
+            }
+          </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+  }
+</div>

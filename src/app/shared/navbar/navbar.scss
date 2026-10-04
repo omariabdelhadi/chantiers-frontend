@@ -1,0 +1,209 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 8px;
+  overflow: visible !important;
+  background-color: #1565C0 !important;
+  color: #ffffff !important;
+  // Override mat-toolbar's default 64px height to fit the logo
+  height: 72px !important;
+  min-height: 72px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+
+  // Force all icon buttons/icons to white
+  mat-icon,
+  .mat-icon {
+    color: #ffffff;
+  }
+
+  button[mat-icon-button],
+  a[mat-button] {
+    color: #ffffff;
+  }
+}
+
+// ── Custom mobile dropdown ─────────────────────────────────────────────────
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.mobile-dropdown {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  width: 220px;
+  background-color: #1565C0;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.mobile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.15s;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  mat-icon {
+    color: #FFB800 !important;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background-color: #0D47A1;
+  }
+}
+
+// ── Brand ──────────────────────────────────────────────────────────────────
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 16px;
+  margin-top:10px;
+  text-decoration: none;
+  color: #ffffff;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.brand-logo {
+  height: 100px !important;
+  width: auto !important;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+// ── Nav links ──────────────────────────────────────────────────────────────
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 8px;
+    color: #ffffff !important;
+
+    mat-icon {
+      color: #ffffff !important;
+    }
+
+    &.active-link {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+// Hamburger only on < 600px; hidden otherwise
+.hamburger-btn {
+  display: none;
+  margin-right: 4px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+// ── User info ──────────────────────────────────────────────────────────────
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .user-role {
+    font-size: 0.75rem;
+    background: #FFB800;
+    color: #1a1a1a;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+  }
+}
+
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+// ── Mobile hamburger (< 600px) ─────────────────────────────────────────────
+@media (max-width: 599px) {
+  .hamburger-btn {
+    display: inline-flex;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
+
+// ── Tablet (≤ 1024px) ──────────────────────────────────────────────────────
+@media (max-width: 1024px) {
+  .brand {
+    margin-right: 8px;
+  }
+}
+
+// ── Mobile (< 768px) ───────────────────────────────────────────────────────
+@media (max-width: 767px) {
+  .brand {
+    margin-right: 4px;
+  }
+
+  .nav-link-text {
+    display: none;
+  }
+
+  .nav-links a {
+    min-width: unset;
+    padding: 0 8px;
+  }
+
+  .user-name,
+  .user-role {
+    display: none;
+  }
+
+  .user-info {
+    margin-right: 4px;
+    padding: 4px;
+  }
+}

@@ -1,0 +1,149 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Chantiers</h1>
+    @if (isAdmin()) {
+      <button mat-raised-button color="primary" routerLink="/chantiers/new">
+        <mat-icon>add</mat-icon>
+        Nouveau Chantier
+      </button>
+    }
+  </div>
+
+  <!-- Filter bar -->
+  @if (allChantiers.length > 0) {
+  <mat-card class="filter-card">
+    <mat-card-content>
+      <div class="filter-bar">
+
+        <mat-form-field appearance="outline" class="filter-search">
+          <mat-label>Rechercher un chantier...</mat-label>
+          <input matInput [formControl]="nomCtrl" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="filter-select">
+          <mat-label>Statut</mat-label>
+          <mat-select [(ngModel)]="statutFilter" (ngModelChange)="search()">
+            <mat-option value="">Tous</mat-option>
+            <mat-option value="EN_COURS">En cours</mat-option>
+            <mat-option value="TERMINE">Terminé</mat-option>
+            <mat-option value="EN_ATTENTE">En attente</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        @if (isAdmin()) {
+          <mat-form-field appearance="outline" class="filter-select">
+            <mat-label>Chef</mat-label>
+            <mat-select [(ngModel)]="chefIdFilter" (ngModelChange)="search()">
+              <mat-option [value]="null">Tous les chefs</mat-option>
+              @for (chef of chefs; track chef.id) {
+                <mat-option [value]="chef.id">{{ chef.nom }} ({{ chef.role }})</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        }
+
+        <mat-form-field appearance="outline" class="filter-select">
+          <mat-label>Avancement</mat-label>
+          <mat-select [(ngModel)]="avancementFilter" (ngModelChange)="onAvancementChange()">
+            <mat-option value="">Tous</mat-option>
+            <mat-option value="0-25">0% - 25%</mat-option>
+            <mat-option value="26-50">26% - 50%</mat-option>
+            <mat-option value="51-75">51% - 75%</mat-option>
+            <mat-option value="76-100">76% - 100%</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-stroked-button (click)="reset()" class="reset-btn">
+          <mat-icon>refresh</mat-icon>
+          Réinitialiser
+        </button>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+  }
+
+  @if (loading) {
+    <div class="loading-wrapper">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  } @else if (dataSource.data.length === 0) {
+    <mat-card class="empty-state">
+      <mat-card-content>
+        <mat-icon class="empty-icon">search_off</mat-icon>
+        <p>Aucun chantier trouvé.</p>
+        @if (isAdmin() && !nomCtrl.value && !statutFilter && chefIdFilter == null && !avancementFilter) {
+          <button mat-raised-button color="primary" routerLink="/chantiers/new">
+            Créer le premier chantier
+          </button>
+        }
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <mat-card>
+      <table mat-table [dataSource]="dataSource" class="full-width">
+
+        <!-- Nom -->
+        <ng-container matColumnDef="nom">
+          <th mat-header-cell *matHeaderCellDef>Nom</th>
+          <td mat-cell *matCellDef="let c">
+            <strong>{{ c.nom }}</strong>
+          </td>
+        </ng-container>
+
+        <!-- Chef -->
+        <ng-container matColumnDef="chef">
+          <th mat-header-cell *matHeaderCellDef>Chef</th>
+          <td mat-cell *matCellDef="let c">{{ c.chefNom }}</td>
+        </ng-container>
+
+        <!-- Statut -->
+        <ng-container matColumnDef="statut">
+          <th mat-header-cell *matHeaderCellDef>Statut</th>
+          <td mat-cell *matCellDef="let c">
+            <span class="statut-badge" [ngClass]="getStatutClass(c.statut)">
+              {{ getStatutLabel(c.statut) }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Avancement -->
+        <ng-container matColumnDef="avancement">
+          <th mat-header-cell *matHeaderCellDef>Avancement</th>
+          <td mat-cell *matCellDef="let c" class="avancement-cell">
+            <mat-progress-bar mode="determinate" [value]="c.avancement"></mat-progress-bar>
+            <span class="avancement-pct">{{ c.avancement }}%</span>
+          </td>
+        </ng-container>
+
+        <!-- Tâches -->
+        <ng-container matColumnDef="nombreTaches">
+          <th mat-header-cell *matHeaderCellDef>Tâches</th>
+          <td mat-cell *matCellDef="let c">{{ c.nombreTaches }}</td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let c" class="actions-cell">
+            <button mat-icon-button color="primary" (click)="voir(c.id)" matTooltip="Voir">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="modifier(c.id)" matTooltip="Modifier">
+              <mat-icon>edit</mat-icon>
+            </button>
+            @if (isAdmin()) {
+              <button mat-icon-button color="warn" (click)="supprimer(c.id)" matTooltip="Supprimer">
+                <mat-icon>delete</mat-icon>
+              </button>
+            }
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  }
+</div>

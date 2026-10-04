@@ -1,0 +1,182 @@
+.profile-container {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.loading-center {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+// Photo card
+.photo-card mat-card-content {
+  padding: 24px !important;
+}
+
+.photo-section {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.avatar-wrap {
+  flex-shrink: 0;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #1565C0;
+}
+
+.avatar-placeholder {
+  font-size: 100px;
+  width: 100px;
+  height: 100px;
+  color: #9E9E9E;
+}
+
+.photo-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  button[mat-stroked-button]:not([color]) {
+    --mdc-outlined-button-outline-color: #1565C0;
+    --mdc-outlined-button-label-text-color: #1565C0;
+    --mdc-outlined-button-container-shape: 8px;
+  }
+}
+
+// Info card
+.info-card mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-left: 4px solid #FFB800;
+  padding-left: 12px;
+
+  mat-card-title {
+    color: #1565C0 !important;
+    font-weight: 700 !important;
+  }
+
+  .header-actions {
+    margin-left: auto;
+
+    button[mat-stroked-button] {
+      --mdc-outlined-button-outline-color: #1565C0;
+      --mdc-outlined-button-label-text-color: #1565C0;
+      --mdc-outlined-button-container-shape: 8px;
+    }
+  }
+}
+
+.photo-card mat-card-header {
+  border-left: 4px solid #FFB800;
+  padding-left: 12px;
+
+  mat-card-title {
+    color: #1565C0 !important;
+    font-weight: 700 !important;
+  }
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.info-icon {
+  color: #757575;
+  margin-top: 2px;
+}
+
+.info-label {
+  font-size: 11px;
+  color: #9E9E9E;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.info-value {
+  font-size: 15px;
+  color: #212121;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+
+  &.role-admin {
+    background: #1565C0;
+    color: #ffffff;
+  }
+
+  &.role-chef_chantier {
+    background: #FFB800;
+    color: #333333;
+  }
+
+  &.role-super_admin {
+    background: #0D47A1;
+    color: #ffffff;
+  }
+}
+
+// Shared form styles
+.edit-form,
+.password-form {
+  padding-top: 8px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 4px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+// Password panel
+.password-panel {
+  mat-panel-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

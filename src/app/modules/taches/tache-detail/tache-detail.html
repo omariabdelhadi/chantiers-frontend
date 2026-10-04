@@ -1,0 +1,93 @@
+<div class="page-container">
+
+  <!-- Back button -->
+  <button mat-button class="back-btn" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+    Retour au chantier
+  </button>
+
+  @if (loading) {
+    <div class="loading-wrapper">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  } @else if (tache) {
+
+    <!-- Header -->
+    <div class="detail-header">
+      <div class="header-main">
+        <h1 class="tache-titre">{{ tache.titre }}</h1>
+        <span class="statut-badge" [ngClass]="getStatutClass(tache.statut)">
+          {{ getStatutLabel(tache.statut) }}
+        </span>
+      </div>
+      <a class="chantier-link" [routerLink]="['/chantiers', tache.chantierId]">
+        <mat-icon>construction</mat-icon>
+        {{ tache.chantierNom }}
+      </a>
+    </div>
+
+    <!-- Avancement -->
+    <mat-card class="detail-card">
+      <mat-card-header>
+        <mat-card-title>Avancement</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="avancement-row">
+          <span class="avancement-pct">{{ tache.avancement }}%</span>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="tache.avancement"
+            class="avancement-bar"
+          ></mat-progress-bar>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Description -->
+    <mat-card class="detail-card">
+      <mat-card-header>
+        <mat-card-title>Description</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @if (tache.description) {
+          <p class="description-text">{{ tache.description }}</p>
+        } @else {
+          <p class="empty-text">Aucune description.</p>
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Employés -->
+    <mat-card class="detail-card">
+      <mat-card-header>
+        <mat-card-title>
+          Employés affectés
+          <span class="count-badge">{{ tache.employes.length }}</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @if (tache.employes.length === 0) {
+          <p class="empty-text">Aucun employé affecté à cette tâche.</p>
+        } @else {
+          <div class="employes-grid">
+            @for (emp of tache.employes; track emp.id) {
+              <div class="employe-card">
+                <mat-icon class="emp-icon">person</mat-icon>
+                <div class="emp-info">
+                  <span class="emp-nom">{{ emp.nom }} {{ emp.prenom }}</span>
+                  @if (emp.poste) {
+                    <span class="emp-poste">{{ emp.poste }}</span>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+
+  } @else {
+    <p class="empty-text">Tâche introuvable.</p>
+  }
+
+</div>

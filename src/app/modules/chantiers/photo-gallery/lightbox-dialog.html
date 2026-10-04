@@ -1,0 +1,43 @@
+<div class="lb-wrapper">
+
+  <!-- Close -->
+  <button mat-icon-button class="lb-close" mat-dialog-close matTooltip="Fermer">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <!-- Click backdrop area to close -->
+  <div class="lb-backdrop-area" mat-dialog-close></div>
+
+  <!-- Prev -->
+  @if (data.photos.length > 1) {
+    <button mat-icon-button class="lb-nav lb-prev"
+            (click)="prev()" [disabled]="current === 0"
+            matTooltip="Précédente">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+  }
+
+  <!-- Image (click on image does NOT close) -->
+  <div class="lb-img-wrapper">
+    <img
+      [src]="'/uploads/' + photo.nomFichier"
+      [alt]="photo.nomFichier"
+      class="lb-img"
+    >
+  </div>
+
+  <!-- Next -->
+  @if (data.photos.length > 1) {
+    <button mat-icon-button class="lb-nav lb-next"
+            (click)="next()" [disabled]="current === data.photos.length - 1"
+            matTooltip="Suivante">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  }
+
+  <!-- Counter -->
+  @if (data.photos.length > 1) {
+    <div class="lb-counter">{{ current + 1 }} / {{ data.photos.length }}</div>
+  }
+
+</div>

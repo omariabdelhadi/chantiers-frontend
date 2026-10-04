@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Affecter des employés</h2>
+
+<mat-dialog-content class="dialog-content">
+  @if (data.allEmployes.length === 0) {
+    <p class="no-data">Aucun employé disponible. Créez d'abord des employés.</p>
+  } @else {
+    <div class="employe-list">
+      @for (e of data.allEmployes; track e.id) {
+        <div class="employe-row">
+          <mat-checkbox
+            [checked]="isSelected(e.id)"
+            (change)="toggle(e.id)"
+            color="primary">
+            <div class="employe-info">
+              <span class="employe-nom">{{ e.nom }} {{ e.prenom }}</span>
+              <span class="employe-poste">{{ e.poste }}</span>
+            </div>
+          </mat-checkbox>
+        </div>
+      }
+    </div>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="cancel()">Annuler</button>
+  <button mat-raised-button color="primary" (click)="confirm()">Confirmer</button>
+</mat-dialog-actions>

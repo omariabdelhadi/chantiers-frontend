@@ -1,0 +1,107 @@
+<div class="page-container">
+
+  <!-- Back button -->
+  <div class="page-header">
+    <button mat-button (click)="goBack()" class="back-btn">
+      <mat-icon>arrow_back</mat-icon>
+      Retour
+    </button>
+    <h1 class="page-title">Fiche employé</h1>
+  </div>
+
+  @if (loading) {
+    <div class="loading-wrapper">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  } @else if (employe) {
+
+    <!-- Photo section -->
+    <mat-card class="detail-card photo-card">
+      <mat-card-header>
+        <mat-card-title>Photo</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="photo-section">
+          <div class="avatar-wrapper">
+            @if (employe.photo) {
+              <img
+                [src]="'/uploads/' + employe.photo.split('/').pop()"
+                alt="Photo de {{ employe.nom }}"
+                class="avatar-img"
+              />
+            } @else {
+              <div class="avatar-placeholder">
+                <mat-icon class="avatar-icon">person</mat-icon>
+              </div>
+            }
+            @if (uploading) {
+              <div class="avatar-overlay">
+                <mat-spinner diameter="36"></mat-spinner>
+              </div>
+            }
+          </div>
+
+          <div class="photo-actions">
+            <input
+              #fileInput
+              type="file"
+              accept="image/*"
+              style="display:none"
+              (change)="onFileSelected($event)"
+            />
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="triggerFileInput()"
+              [disabled]="uploading"
+            >
+              <mat-icon>upload</mat-icon>
+              Ajouter une photo
+            </button>
+            @if (employe.photo) {
+              <button
+                mat-stroked-button
+                color="warn"
+                (click)="confirmDeletePhoto()"
+                [disabled]="uploading"
+              >
+                <mat-icon>delete</mat-icon>
+                Supprimer la photo
+              </button>
+            }
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Info section -->
+    <mat-card class="detail-card info-card">
+      <mat-card-header>
+        <mat-card-title>Informations</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-row">
+            <span class="info-label">Nom</span>
+            <span class="info-value">{{ employe.nom }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Prénom</span>
+            <span class="info-value">{{ employe.prenom }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Poste</span>
+            <span class="info-value">
+              <span class="poste-badge">{{ employe.poste || '—' }}</span>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Téléphone</span>
+            <span class="info-value">{{ employe.telephone || '—' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  }
+</div>

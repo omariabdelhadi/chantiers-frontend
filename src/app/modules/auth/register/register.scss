@@ -1,0 +1,125 @@
+.page-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1565C0;
+    border-left: 4px solid #FFB800;
+    padding-left: 12px;
+  }
+}
+
+.filter-card {
+  margin-bottom: 16px;
+  border-left: 3px solid #FFB800 !important;
+  background-color: #F8F9FA !important;
+
+  mat-card-content {
+    padding: 12px 16px !important;
+  }
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  .filter-search {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .filter-select {
+    min-width: 180px;
+  }
+
+  mat-form-field {
+    margin-bottom: -1.25em;
+  }
+
+  .reset-btn {
+    height: 56px;
+    white-space: nowrap;
+  }
+}
+
+.table-card {
+  margin-bottom: 24px;
+}
+
+.form-card {
+  margin-bottom: 24px;
+
+  mat-card-header {
+    margin-bottom: 16px;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.loading-center {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #757575;
+  padding: 32px;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+
+  &.role-admin {
+    background: #1565C0;
+    color: #ffffff;
+  }
+
+  &.role-chef_chantier {
+    background: #FFB800;
+    color: #333333;
+  }
+
+  &.role-super_admin {
+    background: #0D47A1;
+    color: #ffffff;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 4px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
