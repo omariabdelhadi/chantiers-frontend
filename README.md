@@ -1,59 +1,64 @@
-# Frontend
+# Gestion des chantiers : Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+Interface web d'une application de gestion de chantiers développée pour **SSMTM** (société de génie civil) lors de mon stage de développeur full stack (juillet – août 2026).
 
-## Development server
+> **Dépôt backend (API REST Spring Boot) :** [chantiers-backend](https://github.com/omariabdelhadi/chantiers-backend)
 
-To start a local development server, run:
+## Objectif
+
+Permettre à une société de génie civil de piloter son activité depuis une seule application :
+
+- suivre l'avancement des chantiers ;
+- gérer les équipes et les ressources ;
+- visualiser l'état global sur un tableau de bord de suivi en temps réel.
+
+## Technologies
+
+| Couche | Technologies |
+|---|---|
+| Frontend (ce dépôt) | Angular 21, TypeScript |
+| Backend | Spring Boot, API REST ([dépôt séparé](https://github.com/omariabdelhadi/chantiers-backend)) |
+| Base de données | [à compléter : MySQL, PostgreSQL…] |
+
+## Aperçu
+
+### Tableau de bord
+
+![Tableau de bord](docs/screenshots/01-dashboard.png)
+
+| Liste des chantiers | Détail d'un chantier |
+|---|---|
+| ![Liste des chantiers](docs/screenshots/02-chantiers.png) | ![Détail d'un chantier](docs/screenshots/03-detail-chantier.png) |
+
+| Gestion des équipes | Gestion des ressources |
+|---|---|
+| ![Gestion des équipes](docs/screenshots/04-equipes.png) | ![Gestion des ressources](docs/screenshots/05-ressources.png) |
+
+## Lancer le projet
+
+### Prérequis
+
+- Node.js et npm
+- Angular CLI : `npm install -g @angular/cli`
+- Le backend démarré (voir le [README du backend](https://github.com/omariabdelhadi/chantiers-backend#readme))
+
+### Installation et démarrage
 
 ```bash
+git clone https://github.com/omariabdelhadi/chantiers-frontend.git
+cd chantiers-frontend
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Ouvrir ensuite `http://localhost:4200/`. L'application se recharge automatiquement à chaque modification.
 
-## Code scaffolding
+L'adresse de l'API est configurée dans src/environments/
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Build de production
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Les fichiers générés se trouvent dans le dossier `dist/`.
