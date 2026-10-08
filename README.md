@@ -27,15 +27,25 @@ Permettre à une société de génie civil de piloter son activité depuis une s
 <img width="1919" height="662" alt="image" src="https://github.com/user-attachments/assets/7ba7ffbb-1bb4-4c83-a5a7-5c7ea37a0ee9" />
 
 
-| Liste des chantiers | Détail d'un chantier |
-|---|---|
-| <img width="1919" height="891" alt="image" src="https://github.com/user-attachments/assets/b49eb5de-9584-429b-b40e-045eb4546736" />
- | <img width="1915" height="759" alt="image" src="https://github.com/user-attachments/assets/a3d92fd6-dd09-49e1-afaf-f141a9d24080" />
- |
+### Liste des chantiers
 
-| Gestion des équipes | Gestion des ressources |
-|---|---|
-| ![Gestion des équipes](docs/screenshots/04-equipes.png) | ![Gestion des ressources](docs/screenshots/05-ressources.png) |
+<img width="1919" height="891" alt="image" src="https://github.com/user-attachments/assets/c35839ae-4d13-445b-83a2-ebecf1d21d33" />
+
+
+### Détail d'un chantier
+
+<img width="1915" height="759" alt="image" src="https://github.com/user-attachments/assets/703db681-f0a3-45c1-8c72-b91cabb9395b" />
+
+
+### Authentification
+
+<img width="1398" height="768" alt="image" src="https://github.com/user-attachments/assets/9d53b969-7758-48b0-8d22-4d5a751f3a3d" />
+
+
+### Profile
+
+<img width="1919" height="888" alt="image" src="https://github.com/user-attachments/assets/c087f40f-c047-43fc-8455-c88d385caae4" />
+
 
 ## Lancer le projet
 
