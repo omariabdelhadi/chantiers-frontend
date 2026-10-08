@@ -1,4 +1,4 @@
-# Gestion des chantiers : Frontend
+<img width="1919" height="662" alt="image" src="https://github.com/user-attachments/assets/9e009c0c-c34a-4a35-ad69-16985201cbde" /># Gestion des chantiers : Frontend
 
 Interface web d'une application de gestion de chantiers développée pour **SSMTM** (société de génie civil) lors de mon stage de développeur full stack (juillet – août 2026).
 
@@ -24,7 +24,8 @@ Permettre à une société de génie civil de piloter son activité depuis une s
 
 ### Tableau de bord
 
-![Tableau de bord](docs/screenshots/01-dashboard.png)
+<img width="1919" height="662" alt="image" src="https://github.com/user-attachments/assets/7ba7ffbb-1bb4-4c83-a5a7-5c7ea37a0ee9" />
+
 
 | Liste des chantiers | Détail d'un chantier |
 |---|---|
