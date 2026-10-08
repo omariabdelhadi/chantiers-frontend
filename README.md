@@ -29,7 +29,9 @@ Permettre à une société de génie civil de piloter son activité depuis une s
 
 | Liste des chantiers | Détail d'un chantier |
 |---|---|
-| ![Liste des chantiers](docs/screenshots/02-chantiers.png) | ![Détail d'un chantier](docs/screenshots/03-detail-chantier.png) |
+| <img width="1919" height="891" alt="image" src="https://github.com/user-attachments/assets/b49eb5de-9584-429b-b40e-045eb4546736" />
+ | <img width="1915" height="759" alt="image" src="https://github.com/user-attachments/assets/a3d92fd6-dd09-49e1-afaf-f141a9d24080" />
+ |
 
 | Gestion des équipes | Gestion des ressources |
 |---|---|
