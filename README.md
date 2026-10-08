@@ -1,4 +1,4 @@
-<img width="1919" height="662" alt="image" src="https://github.com/user-attachments/assets/9e009c0c-c34a-4a35-ad69-16985201cbde" /># Gestion des chantiers : Frontend
+# Gestion des chantiers : Frontend
 
 Interface web d'une application de gestion de chantiers développée pour **SSMTM** (société de génie civil) lors de mon stage de développeur full stack (juillet – août 2026).
 
